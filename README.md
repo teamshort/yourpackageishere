@@ -1,6 +1,7 @@
 # Project Name: Your Package Is Here
 401 Mid-Course Java Project
 
+![image](https://i.imgur.com/dcCzcSG.jpg)
 
 ### Summary
 This Java application is designed to be used by a building manager to scan received 
