@@ -10,14 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
-import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcConfigurer;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -26,14 +22,13 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+;
 
 //Resources: Jason Hiskey - https://codefellows.slack.com/files/UBJJGNL82/FKY9V3BNY/integration_testing_guide.java
 
@@ -50,6 +45,8 @@ public class TenantControllerTest {
     static
     MockMvc mockMvc;
 
+
+    //wait for the callback function to execute
     @Autowired
     WebApplicationContext context;
 
@@ -75,6 +72,7 @@ public class TenantControllerTest {
         return user("building1").password("foo").roles("ADMIN");
     }
 
+    //using testuser login and password for following testings
     //@GetMapping("/tenant/all")
     @WithMockUser
     @Test
