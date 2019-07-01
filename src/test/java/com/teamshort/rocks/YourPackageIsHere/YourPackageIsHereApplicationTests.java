@@ -29,6 +29,7 @@ public class YourPackageIsHereApplicationTests {
 		mockMvc.perform(get("/")).andExpect(content().string(containsString("Home")));
 	}
 
+
 	@Test
 	public void testLoginMVC() throws Exception {
 		mockMvc.perform(get("/login")).andExpect(content().string(containsString("Username:")));
