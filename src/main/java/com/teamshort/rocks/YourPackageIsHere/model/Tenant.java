@@ -1,5 +1,7 @@
-package com.teamshort.rocks.YourPackageIsHere;
+package com.teamshort.rocks.YourPackageIsHere.model;
 
+
+import com.teamshort.rocks.YourPackageIsHere.model.Building;
 
 import javax.persistence.*;
 

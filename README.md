@@ -1,23 +1,21 @@
 # Project Name: Your Package Is Here
-401 Mid-Course Java Project
-
-![image](https://i.imgur.com/dcCzcSG.jpg)
+401 Final Java Project (Back end)
 
 ### Summary
 This Java application is designed to be used by a building manager to scan received 
-packages in the building for tenants' delieveries and send an email as a notification.
+packages in the building for tenants' delieveries and send an email and text as a notification.
 
 
 ### Developers
    - [Kush Shrestha](https://github.com/kushshrestha01)
-   - [Reina Vencer](https://github.com/river-ceanne)
-   - [Devon Hackley](https://github.com/devonhackley)
+   - [Levi Porter](https://github.com/levibrooke)
+   - [Chaitanya Narukulla](https://github.com/chaitanyanarukulla)
    - [John Winters](https://github.com/thatsjustjohn)
    
    
 ### Problem Domain
 When you receive an email from usps that you package has been delivered, Tenants are unsure if the package has been delivered to the apartment office or not. 
-So using our app, building managers can scan the qr code in the package which will automatic send the email to the tenant that their package is in the office for pickup. Tenants are assured that
+So using our app, building managers can scan the qr code in the package which will automatic send the email and text to the tenant that their package is in the office for pickup. Tenants are assured that
 their package has been delivered and is safe stored in office.  
 
 
@@ -37,15 +35,9 @@ As a developers, leveraging delivery APIs to scan QR code or bar code to get the
 
 
 ### Frameworks & Technologies Used
-   - Spring Boot (MVC)
-   - Bootstrap
+   - Spring Boot
    - Java
-   
-   
-### API and Library
-   - [Sendgrid API](https://sendgrid.com)
-   - [nimiq/qr-scanner Library](https://github.com/nimiq/qr-scanner)
-   
+   - AWS Services 
    
 ### Starter Guide
 
@@ -61,17 +53,22 @@ open the mobile camera.
 #### Deployed Link: 
 - [www.yourpackageishere.com](https://www.yourpackageishere.com/)
 
-### To run locally:
+### To run your backend locally:
 
 1. Clone down the repository on your local machine with command:
 
-           git clone https://github.com/teamshort/yourpackageishere.git
+           git clone https://github.com/your-package-is-here/yourpackageishere-backend.git
 
 2. Make sure you have Postgres installed in your local machine. You must first create a database named 'yourpackageishere' in psql with command:
             
            CREATE DATABASE yourpackageishere;
            
-3. On your application.properties, make sure postgres is set up on with your individual user environment variables
+3. Before adding anything, run the following command in your database
+ 
+            INSERT INTO roles(name) VALUES('ROLE_USER');
+            INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+           
+4. On your application.properties, make sure postgres is set up on with your individual user environment variables
 
         spring.datasource.url=${DATABASE_URL}
         spring.datasource.username=${DATABASE_USERNAME}
@@ -79,69 +76,27 @@ open the mobile camera.
         spring.jpa.hibernate.ddl-auto=update
         spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
         server.port=5000
-    
-    Also, include a SendGrid API Key on your environment variables with variable name:
-     
-        SENDGRID_API_KEY
 
-4. Run the application through your IDE or use the terminal command:
+5. Run the application through your IDE or use the terminal command:
         
         ./gradlew bootrun
 
-5. You will now be able to run the application on your local machine with URL:
+6. You will now be able to run the back end on your local machine with URL:
 
         http://localhost:5000
 
 ### Entities
-- [Building](./src/main/java/com/teamshort/rocks/YourPackageIsHere/Building.java)
-- [Tenant](./src/main/java/com/teamshort/rocks/YourPackageIsHere/Tenant.java)
-
+- [Building](./src/main/java/com/teamshort/rocks/YourPackageIsHere/model/Building.java)
+- [Tenant](./src/main/java/com/teamshort/rocks/YourPackageIsHere/model/Tenant.java)
 
 ### Controllers
-- [BuildingController](./src/main/java/com/teamshort/rocks/YourPackageIsHere/BuildingController.java)
-- [TenantController](./src/main/java/com/teamshort/rocks/YourPackageIsHere/TenantController.java)
-
+- [Auth Controller](./src/main/java/com/teamshort/rocks/YourPackageIsHere/controller/AuthController.java)
+- [Building Controller](./src/main/java/com/teamshort/rocks/YourPackageIsHere/controller/BuildingController.java)
+- [Tenant Controller](./src/main/java/com/teamshort/rocks/YourPackageIsHere/controller/TenantController.java)
 
 ### CRUD Repositories
-- [BuildingRepository](./src/main/java/com/teamshort/rocks/YourPackageIsHere/BuildingRepository.java)
-- [TenantRepository](./src/main/java/com/teamshort/rocks/YourPackageIsHere/TenantRepository.java)
-
-
-### Routes
-    @GetMapping("/")
-        public String getHomePage(Principal principal, Model model)
-    
-    @GetMapping("/login")
-        public String getLoginPage(Principal principal, Model model)
-        
-    @GetMapping("/register")
-        public String getRegisterPage(Principal principal, Model model)
-    
-    @GetMapping("/aboutus")
-        public String getSignUpPage(Principal principal, Model model)
-        
-    @PostMapping("/buildingcreate")
-        public RedirectView createUser(String username, String name, String streetaddress, String city, String state, String zip, String email, String password) throws ParseException
-    
-    @GetMapping("/tenant/all")
-        public String getAllTenants(Principal principal, Model model)
-    
-    @GetMapping("/tenant/{id}")
-        public String getTenantPage(@PathVariable String id, Model m)
-    
-    @GetMapping("/tenant/add")
-        public String getTenantAddPage()
-        
-    @PostMapping("/tenantcreate")
-        public RedirectView createTenant(Principal p, String firstname, String lastname, String email, String aptnum, String phonenum)    
-    
-    @PostMapping("/tenantedit")
-        public RedirectView editTenant(Principal p, String id, String firstname, String lastname, String email, String aptnum, String phonenum)     
-
-### Screen Shots
-![image](https://i.imgur.com/geZ4PIG.png)
-![image](https://i.imgur.com/oys3Oqt.png)
-![image](https://i.imgur.com/28D097B.png)
+- [Building Repository](./src/main/java/com/teamshort/rocks/YourPackageIsHere/repository/BuildingRepository.java)
+- [Tenant Repository](./src/main/java/com/teamshort/rocks/YourPackageIsHere/repository/TenantRepository.java)
 
 ### License - MIT
 

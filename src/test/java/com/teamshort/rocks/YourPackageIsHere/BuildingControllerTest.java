@@ -1,6 +1,11 @@
 package com.teamshort.rocks.YourPackageIsHere;
 
 
+import com.teamshort.rocks.YourPackageIsHere.controller.BuildingController;
+import com.teamshort.rocks.YourPackageIsHere.model.Building;
+import com.teamshort.rocks.YourPackageIsHere.model.Tenant;
+import com.teamshort.rocks.YourPackageIsHere.repository.BuildingRepository;
+import com.teamshort.rocks.YourPackageIsHere.repository.TenantRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
@@ -19,6 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
@@ -133,13 +138,13 @@ public class BuildingControllerTest {
                 .andDo(print())
                 .andExpect(header().string("location", containsString("/tenant/all")));
 
-       Building testBuilding = buildingRepository.findByUsername("bloo");
+       Optional<Building> testBuilding = buildingRepository.findByUsername("bloo");
        List<Tenant> testTenant =  tenantRepository.findByEmail("fake@fake.com");
-       assertFalse(BuildingController.sendEmailHelper(testBuilding, testTenant.get(0),"1243123dsadasdasdasdsf"));
+       assertFalse(BuildingController.helperSendEmail(testTenant.get(0),"1243123dsadasdasdasdsf"));
 
         // Delete Entities
         tenantRepository.delete(testTenant.get(0));
-        buildingRepository.delete(testBuilding);
+        buildingRepository.delete(testBuilding.get());
     }
 
     @Test
@@ -157,7 +162,7 @@ public class BuildingControllerTest {
                 .andDo(print())
                 .andExpect(header().string("location", containsString("/")));
 
-        Building buildingResCreate = buildingRepository.findByUsername("bloop");
+        Building buildingResCreate = buildingRepository.findByUsername("bloop").get();
 
         assertEquals("Bloop Building",buildingResCreate.getName()); // check Creation and Read data
 
@@ -165,7 +170,7 @@ public class BuildingControllerTest {
         buildingResCreate.setName("New Name");
         buildingRepository.save(buildingResCreate);
 
-        Building buildingResUpdate = buildingRepository.findByUsername("bloop");
+        Building buildingResUpdate = buildingRepository.findByUsername("bloop").get();
 
 
         assertEquals("New Name",buildingResUpdate.getName()); // check Update and Read data

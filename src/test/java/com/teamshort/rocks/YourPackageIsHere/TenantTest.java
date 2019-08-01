@@ -1,39 +1,15 @@
 package com.teamshort.rocks.YourPackageIsHere;
 
-import org.junit.Before;
+import com.teamshort.rocks.YourPackageIsHere.model.Building;
+import com.teamshort.rocks.YourPackageIsHere.model.Tenant;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.reactive.server.MockServerConfigurer;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.RequestPostProcessor;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.test.web.servlet.setup.MockMvcConfigurer;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.*;
 
 
-import org.springframework.context.annotation.Configuration;
-
-
-import javax.naming.Context;
-
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
-import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.springSecurity;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 
 
 public class TenantTest {
@@ -41,12 +17,12 @@ public class TenantTest {
     @Test
     public void testTenantDefaultConstructor() {
         Tenant tenant = new Tenant();
-        assertNull(tenant.firstname);
-        assertNull(tenant.lastname);
-        assertNull(tenant.aptnum);
-        assertNull(tenant.email);
-        assertNull(tenant.phonenum);
-        assertNull(tenant.building);
+        assertNull(tenant.getFirstname());
+        assertNull(tenant.getLastname());
+        assertNull(tenant.getAptnum());
+        assertNull(tenant.getEmail());
+        assertNull(tenant.getPhonenum());
+        assertNull(tenant.getBuilding());
 
     }
 
@@ -59,11 +35,11 @@ public class TenantTest {
     public void testTenantConstructor(){
 //  Tenant(String firstname, String lastname, String email, String aptnum, String phonenum, Building building)
         Tenant tenant = initialize();
-        assertEquals("Bloopy",tenant.firstname);
-        assertEquals("Blooperson", tenant.lastname);
-        assertEquals("bloop@bloop.com", tenant.email);
-        assertEquals("1D", tenant.aptnum);
-        assertEquals("111-111-1111", tenant.phonenum);
+        assertEquals("Bloopy",tenant.getFirstname());
+        assertEquals("Blooperson", tenant.getLastname());
+        assertEquals("bloop@bloop.com", tenant.getEmail());
+        assertEquals("1D", tenant.getAptnum());
+        assertEquals("111-111-1111", tenant.getPhonenum());
 
     }
 

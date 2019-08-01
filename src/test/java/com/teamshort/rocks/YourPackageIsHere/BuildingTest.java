@@ -1,23 +1,12 @@
 package com.teamshort.rocks.YourPackageIsHere;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.teamshort.rocks.YourPackageIsHere.model.Building;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 public class BuildingTest {
@@ -25,12 +14,12 @@ public class BuildingTest {
     @Test
     public void testBuildingDefaultConstructor() {
         Building building = new Building();
-        assertNull(building.tenants);
-        assertNull(building.city);
-        assertNull(building.email);
-        assertNull(building.password);
-        assertNull(building.name);
-        assertNull(building.streetaddress);
+        assertNull(building.getTenants());
+        assertNull(building.getCity());
+        assertNull(building.getEmail());
+        assertNull(building.getPassword());
+        assertNull(building.getState());
+        assertNull(building.getStreetaddress());
 
     }
 
@@ -39,14 +28,14 @@ public class BuildingTest {
 //  Building(String username, String name, String streetaddress, String city, String state, String zip, String email, String password)
     Building building = new Building("bloop","Bloop Building","1 Bloop Ave",
             "Bloop City", "WA", "90210","bloop@bloop.com","bloop123");
-    assertEquals("bloop",building.username);
-    assertEquals("Bloop Building", building.name);
-    assertEquals("1 Bloop Ave", building.streetaddress);
-    assertEquals("Bloop City",building.city);
-    assertEquals("WA", building.state);
-    assertEquals("90210", building.zip);
-    assertEquals("bloop@bloop.com", building.email);
-    assertEquals("bloop123", building.password);
+    assertEquals("bloop",building.getUsername());
+    assertEquals("Bloop Building", building.getName());
+    assertEquals("1 Bloop Ave", building.getStreetaddress());
+    assertEquals("Bloop City",building.getCity());
+    assertEquals("WA", building.getState());
+    assertEquals("90210", building.getZip());
+    assertEquals("bloop@bloop.com", building.getEmail());
+    assertEquals("bloop123", building.getPassword());
 
     }
 

@@ -1,5 +1,7 @@
-package com.teamshort.rocks.YourPackageIsHere;
+package com.teamshort.rocks.YourPackageIsHere.repository;
 
+import com.teamshort.rocks.YourPackageIsHere.model.Building;
+import com.teamshort.rocks.YourPackageIsHere.model.Tenant;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
